@@ -1,10 +1,11 @@
 package com.zairussalamdev.gitbox.ui.main
 
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zairussalamdev.gitbox.databinding.ActivityMainBinding
+import com.zairussalamdev.gitbox.ui.DetailActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -19,7 +20,9 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(binding.root.context)
             setHasFixedSize(true)
             adapter = GithubUserAdapter(result) {
-                Toast.makeText(binding.root.context, it.name, Toast.LENGTH_SHORT).show()
+                val intent = Intent(this@MainActivity, DetailActivity::class.java)
+                intent.putExtra(DetailActivity.EXTRA_USER, it)
+                startActivity(intent)
             }
         }
     }

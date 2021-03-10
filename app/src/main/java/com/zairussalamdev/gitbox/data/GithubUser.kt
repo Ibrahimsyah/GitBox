@@ -13,6 +13,7 @@ data class GithubUser(
     val name: String,
     val avatar: String,
     val company: String,
+    val location: String,
     val repository: Int,
     val follower: Int,
     val following: Int,
