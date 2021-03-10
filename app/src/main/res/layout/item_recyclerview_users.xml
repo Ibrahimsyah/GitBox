@@ -26,10 +26,10 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
+            android:text="@string/name"
             android:textColor="@color/github_black"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:text="@string/name"
             app:layout_constraintLeft_toRightOf="@id/user_image"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -39,9 +39,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
+            android:text="@string/username"
             android:textSize="12sp"
             android:textStyle="italic"
-            android:text="@string/username"
             app:layout_constraintLeft_toRightOf="@id/user_image"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/user_name" />
@@ -52,8 +52,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="16dp"
-            android:textSize="13sp"
             android:text="@string/location"
+            android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/user_image"
             app:layout_constraintRight_toRightOf="parent" />
