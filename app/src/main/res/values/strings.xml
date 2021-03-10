@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">GitBox</string>
     <string name="github_logo">Github Logo</string>
+    <string name="user_image">User Image</string>
 </resources>
