@@ -16,10 +16,10 @@ class GithubUserAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(user: GithubUser) {
             with(binding) {
-                val image = binding.root.resources.getIdentifier(
-                    user.avatar,
-                    "drawable",
-                    root.context.packageName
+                val image = root.resources.getIdentifier(
+                        user.avatar,
+                        "drawable",
+                        root.context.packageName
                 )
                 userImage.load(image) {
                     crossfade(true)

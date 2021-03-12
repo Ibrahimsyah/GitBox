@@ -9,14 +9,14 @@ import org.json.JSONObject
 
 @Parcelize
 data class GithubUser(
-    val username: String,
-    val name: String,
-    val avatar: String,
-    val company: String,
-    val location: String,
-    val repository: Int,
-    val follower: Int,
-    val following: Int,
+        val username: String = "",
+        val name: String = "",
+        val avatar: String = "",
+        val company: String = "",
+        val location: String = "",
+        val repository: Int = 0,
+        val follower: Int = 0,
+        val following: Int = 0
 ) : Parcelable {
     companion object {
         fun populateUsersData(context: Context): List<GithubUser> {
