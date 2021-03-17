@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
@@ -37,14 +38,18 @@ class MainActivity : AppCompatActivity() {
             adapter = githubUserAdapter
         }
 
-        val viewModel = ViewModelProvider(
+        viewModel = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
         ).get(MainViewModel::class.java)
 
-        viewModel.getAllUsers().observe(this, {
-            githubUserAdapter.setUserList(it)
+        viewModel.getUsers().observe(this, { users ->
+            users?.let {
+                binding.progressBar.visibility = View.GONE
+                githubUserAdapter.setUserList(it)
+            }
         })
+        viewModel.getAllUsers()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
