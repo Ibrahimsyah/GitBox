@@ -4,29 +4,27 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.zairussalamdev.gitbox.data.GithubUser
+import com.zairussalamdev.gitbox.data.entities.User
 import com.zairussalamdev.gitbox.databinding.ItemRecyclerviewUsersBinding
 
 class GithubUserAdapter(
-    private val githubUser: List<GithubUser>,
-    private val listener: (user: GithubUser) -> Unit
+    private val listener: (user: User) -> Unit
 ) : RecyclerView.Adapter<GithubUserAdapter.UserViewHolder>() {
+    private var githubUser: List<User> = listOf()
+
+    fun setUserList(users: List<User>) {
+        githubUser = users
+        this.notifyDataSetChanged()
+    }
 
     inner class UserViewHolder(private val binding: ItemRecyclerviewUsersBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(user: GithubUser) {
+        fun bind(user: User) {
             with(binding) {
-                val image = root.resources.getIdentifier(
-                        user.avatar,
-                        "drawable",
-                        root.context.packageName
-                )
-                userImage.load(image) {
+                userImage.load(user.avatar) {
                     crossfade(true)
                 }
-                userName.text = user.name
                 userUsername.text = user.username
-                userCompany.text = user.company
                 itemView.setOnClickListener { listener(user) }
             }
         }

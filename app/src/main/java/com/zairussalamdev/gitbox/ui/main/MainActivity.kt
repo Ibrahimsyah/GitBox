@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zairussalamdev.gitbox.R
 import com.zairussalamdev.gitbox.databinding.ActivityMainBinding
@@ -15,24 +16,35 @@ import com.zairussalamdev.gitbox.utils.Logger
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var viewModel: MainViewModel
+    private lateinit var githubUserAdapter: GithubUserAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val viewModel = MainViewModel(this)
-        val result = viewModel.getAllUsers()
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+
 
         with(binding.rvGithubUsers) {
             layoutManager = LinearLayoutManager(binding.root.context)
             setHasFixedSize(true)
-            adapter = GithubUserAdapter(result) {
+            githubUserAdapter = GithubUserAdapter {
                 val intent = Intent(this@MainActivity, DetailActivity::class.java)
-                intent.putExtra(DetailActivity.EXTRA_USER, it)
+                intent.putExtra(DetailActivity.EXTRA_USER, it.username)
                 startActivity(intent)
             }
+            adapter = githubUserAdapter
         }
+
+        val viewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        ).get(MainViewModel::class.java)
+
+        viewModel.getAllUsers().observe(this, {
+            githubUserAdapter.setUserList(it)
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
