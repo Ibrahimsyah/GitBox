@@ -8,4 +8,7 @@ data class User(
 
     @SerializedName("avatar_url")
     val avatar: String? = "",
+
+    @SerializedName("html_url")
+    val url: String? = ""
 )

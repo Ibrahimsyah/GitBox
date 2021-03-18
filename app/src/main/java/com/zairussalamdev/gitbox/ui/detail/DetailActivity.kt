@@ -1,4 +1,4 @@
-package com.zairussalamdev.gitbox.ui
+package com.zairussalamdev.gitbox.ui.detail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -8,4 +8,8 @@ object Logger {
     fun debug(msg: String) {
         Log.d(TAG, msg)
     }
+
+    fun error(error: String) {
+        Log.e(TAG, error)
+    }
 }

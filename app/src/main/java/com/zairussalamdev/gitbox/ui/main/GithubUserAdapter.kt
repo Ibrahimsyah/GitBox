@@ -24,7 +24,8 @@ class GithubUserAdapter(
                 userImage.load(user.avatar) {
                     crossfade(true)
                 }
-                userUsername.text = user.username
+                userName.text = user.username
+                userUrl.text = user.url
                 itemView.setOnClickListener { listener(user) }
             }
         }

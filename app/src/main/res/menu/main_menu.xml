@@ -8,4 +8,9 @@
         android:title="@string/search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="collapseActionView|always" />
+    <item
+        android:id="@+id/menu_change_language"
+        android:contentDescription="@string/change_language"
+        android:title="@string/change_language"
+        app:showAsAction="never" />
 </menu>

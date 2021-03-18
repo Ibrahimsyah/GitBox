@@ -10,6 +10,9 @@
     <string name="location">Location</string>
     <string name="anyNumber">1000</string>
     <string name="username">username</string>
+    <string name="url">url</string>
     <string name="name">Name</string>
     <string name="search">Search Github Users</string>
+    <string name="change_language">Change Language</string>
+    <string name="no_data">No Data Found</string>
 </resources>
