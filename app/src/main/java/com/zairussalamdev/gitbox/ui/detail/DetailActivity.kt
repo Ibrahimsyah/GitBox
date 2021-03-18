@@ -2,9 +2,8 @@ package com.zairussalamdev.gitbox.ui.detail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import coil.load
-import coil.transform.CircleCropTransformation
-import com.zairussalamdev.gitbox.data.GithubUser
+import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.tabs.TabLayoutMediator
 import com.zairussalamdev.gitbox.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity() {
@@ -17,23 +16,35 @@ class DetailActivity : AppCompatActivity() {
         val binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val user = intent.getParcelableExtra<GithubUser>(EXTRA_USER)
-        user?.let {
-            with(binding) {
-                userName.text = user.name
-                userUsername.text = user.username
-                userRepository.text = user.repository.toString()
-                userFollower.text = user.follower.toString()
-                userFollowing.text = user.following.toString()
-                userCompany.text = user.company
-                userLocation.text = user.location
-                val image =
-                    resources.getIdentifier(user.avatar, "drawable", root.context.packageName)
-                userImage.load(image) {
-                    crossfade(true)
-                    transformations(CircleCropTransformation())
-                }
-            }
+        val username = intent.getStringExtra(EXTRA_USER)
+        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())
+            .get(DetailViewModel::class.java)
+
+        username?.let {
+            viewModel.getUserDetail(username).observe(this, {
+//                with(binding) {
+//                    userName.text = it.name
+//                    userUsername.text = it.username
+//                    userRepository.text = it.repository.toString()
+//                    userFollower.text = it.followers.toString()
+//                    userFollowing.text = it.following.toString()
+//                    userCompany.text = it.company
+//                    userLocation.text = it.location
+//
+//                    userImage.load(it.avatar) {
+//                        crossfade(true)
+//                        transformations(CircleCropTransformation())
+//                    }
+//                }
+            })
+        }
+
+        val tabTitles = arrayOf("Followers", "Following")
+        with(binding) {
+            viewpager.adapter = ViewPagerAdapter(this@DetailActivity)
+            TabLayoutMediator(tabs, viewpager) { tab, position ->
+                tab.text = tabTitles[position]
+            }.attach()
         }
     }
 }

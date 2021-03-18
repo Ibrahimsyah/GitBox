@@ -18,9 +18,15 @@ data class UserDetail(
     @SerializedName("location")
     val location: String? = "",
 
+    @SerializedName("bio")
+    val bio: String? = "",
+
+    @SerializedName("public_repos")
+    val repository: Int? = 0,
+
     @SerializedName("followers")
-    val followers: String? = "",
+    val followers: Int? = 0,
 
     @SerializedName("following")
-    val following: String? = "",
+    val following: Int? = 0,
 )
