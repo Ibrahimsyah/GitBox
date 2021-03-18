@@ -5,6 +5,9 @@
         <item name="colorOnPrimary">@color/white</item>
         <item name="android:statusBarColor" tools:targetApi="l">@color/github_black</item>
         <item name="colorControlNormal">@color/white</item>
+    </style>
+
+    <style name="ActionBarTheme">
         <item name="android:textColorHint">@color/white</item>
         <item name="android:textColorPrimary">@color/white</item>
         <item name="android:textColor">@color/github_black</item>
