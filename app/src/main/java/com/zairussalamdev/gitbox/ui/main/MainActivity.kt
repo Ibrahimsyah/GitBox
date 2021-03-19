@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())
-            .get(MainViewModel::class.java)
+                .get(MainViewModel::class.java)
 
         viewModel.getSearchQuery().observe(this, { query ->
             if (query.isEmpty()) {

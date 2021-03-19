@@ -8,7 +8,7 @@ import com.zairussalamdev.gitbox.data.entities.User
 import com.zairussalamdev.gitbox.databinding.ItemRecyclerviewUsersBinding
 
 class GithubUserAdapter(
-    private val listener: (user: User) -> Unit
+        private val listener: (user: User) -> Unit
 ) : RecyclerView.Adapter<GithubUserAdapter.UserViewHolder>() {
     private var githubUser: List<User> = listOf()
 
@@ -18,7 +18,7 @@ class GithubUserAdapter(
     }
 
     inner class UserViewHolder(private val binding: ItemRecyclerviewUsersBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+            RecyclerView.ViewHolder(binding.root) {
         fun bind(user: User) {
             with(binding) {
                 userImage.load(user.avatar) {
@@ -33,11 +33,11 @@ class GithubUserAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val view =
-            ItemRecyclerviewUsersBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+                ItemRecyclerviewUsersBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                )
         return UserViewHolder(view)
     }
 

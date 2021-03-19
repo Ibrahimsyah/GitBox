@@ -30,6 +30,7 @@
             android:textSize="18sp"
             android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_github_users"
         android:layout_width="0dp"

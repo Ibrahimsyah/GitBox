@@ -10,9 +10,9 @@ class RetrofitService {
         fun getInstance(): Retrofit {
             if (retrofit == null) {
                 retrofit = Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
+                        .baseUrl(BASE_URL)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build()
             }
             return retrofit as Retrofit
         }
