@@ -5,10 +5,8 @@
     <string name="repository">Repository</string>
     <string name="followers">Followers</string>
     <string name="followings">Following</string>
-    <string name="Status">Status</string>
     <string name="company">Company</string>
     <string name="location">Location</string>
-    <string name="any_number">1000</string>
     <string name="username">username</string>
     <string name="url">url</string>
     <string name="name">Name</string>
