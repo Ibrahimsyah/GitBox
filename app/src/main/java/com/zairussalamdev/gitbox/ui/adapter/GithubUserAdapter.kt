@@ -1,4 +1,4 @@
-package com.zairussalamdev.gitbox.ui.main
+package com.zairussalamdev.gitbox.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

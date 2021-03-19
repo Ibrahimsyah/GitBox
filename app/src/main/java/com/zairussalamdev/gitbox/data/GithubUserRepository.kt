@@ -36,8 +36,8 @@ class GithubUserRepository(private val apiService: GithubApiInterface) {
     fun searchUsers(query: String, callback: UserCallback<List<User>>) {
         apiService.searchUser(query).enqueue(object : Callback<UserSearchResponse> {
             override fun onResponse(
-                call: Call<UserSearchResponse>,
-                response: Response<UserSearchResponse>
+                    call: Call<UserSearchResponse>,
+                    response: Response<UserSearchResponse>
             ) {
                 val users = response.body()
                 users?.let { callback.onSuccess(it.users) }
@@ -57,6 +57,34 @@ class GithubUserRepository(private val apiService: GithubApiInterface) {
             }
 
             override fun onFailure(call: Call<UserDetail>, t: Throwable) {
+                t.message?.let { callback.onError(it) }
+            }
+
+        })
+    }
+
+    fun getUserFollowers(username: String, callback: UserCallback<List<User>>) {
+        apiService.getUserFollowers(username).enqueue(object : Callback<List<User>> {
+            override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
+                val users = response.body()
+                users?.let { callback.onSuccess(it) }
+            }
+
+            override fun onFailure(call: Call<List<User>>, t: Throwable) {
+                t.message?.let { callback.onError(it) }
+            }
+
+        })
+    }
+
+    fun getUserFollowing(username: String, callback: UserCallback<List<User>>) {
+        apiService.getUserFollowing(username).enqueue(object : Callback<List<User>> {
+            override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
+                val users = response.body()
+                users?.let { callback.onSuccess(it) }
+            }
+
+            override fun onFailure(call: Call<List<User>>, t: Throwable) {
                 t.message?.let { callback.onError(it) }
             }
 

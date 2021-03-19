@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zairussalamdev.gitbox.R
 import com.zairussalamdev.gitbox.databinding.ActivityMainBinding
+import com.zairussalamdev.gitbox.ui.adapter.GithubUserAdapter
 import com.zairussalamdev.gitbox.ui.detail.DetailActivity
 
 class MainActivity : AppCompatActivity() {

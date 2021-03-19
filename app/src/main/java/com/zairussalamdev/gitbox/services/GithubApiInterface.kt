@@ -24,4 +24,12 @@ interface GithubApiInterface {
     @Headers("Authorization: token $apiKey")
     @GET("users/{username}")
     fun getUserDetail(@Path("username") username: String): Call<UserDetail>
+
+    @Headers("Authorization: token $apiKey")
+    @GET("users/{username}/followers")
+    fun getUserFollowers(@Path("username") username: String): Call<List<User>>
+
+    @Headers("Authorization: token $apiKey")
+    @GET("users/{username}/following")
+    fun getUserFollowing(@Path("username") username: String): Call<List<User>>
 }

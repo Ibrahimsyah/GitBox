@@ -7,6 +7,7 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.google.android.material.tabs.TabLayoutMediator
 import com.zairussalamdev.gitbox.databinding.ActivityDetailBinding
+import com.zairussalamdev.gitbox.ui.adapter.ViewPagerAdapter
 
 class DetailActivity : AppCompatActivity() {
     companion object {
@@ -18,11 +19,11 @@ class DetailActivity : AppCompatActivity() {
         val binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val username = intent.getStringExtra(EXTRA_USER)
+        val username = intent.getStringExtra(EXTRA_USER) ?: ""
         val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())
-            .get(DetailViewModel::class.java)
+                .get(DetailViewModel::class.java)
 
-        username?.let {
+        username.let {
             viewModel.getUserDetail(username).observe(this, {
                 with(binding) {
                     userName.text = it.name
@@ -43,7 +44,7 @@ class DetailActivity : AppCompatActivity() {
 
         val tabTitles = arrayOf("Followers", "Following")
         with(binding) {
-            viewpager.adapter = ViewPagerAdapter(this@DetailActivity)
+            viewpager.adapter = ViewPagerAdapter(this@DetailActivity, username)
             TabLayoutMediator(tabs, viewpager) { tab, position ->
                 tab.text = tabTitles[position]
             }.attach()
