@@ -22,7 +22,7 @@ class ViewPagerAdapter(
         }
         fragment.arguments = Bundle().apply {
             putString(FollowerFragment.ARG_USERNAME, username)
-            putBoolean(FollowerFragment.ARG_ISFOLLOWERS, isFollowerFragment)
+            putBoolean(FollowerFragment.ARG_IS_FOLLOWERS, isFollowerFragment)
         }
         return fragment
     }

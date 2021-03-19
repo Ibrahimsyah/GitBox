@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GitBox</string>
+    <string name="github_logo">Logo Github</string>
+    <string name="user_image">Gambar User</string>
+    <string name="repository">Repositori</string>
+    <string name="followers">Pengikut</string>
+    <string name="followings">Mengikuti</string>
+    <string name="Status">Status</string>
+    <string name="company">Pekerjaan</string>
+    <string name="location">Lokasi</string>
+    <string name="any_number">1000</string>
+    <string name="username">username</string>
+    <string name="url">url</string>
+    <string name="name">Nama</string>
+    <string name="search">Cari Pengguna Github</string>
+    <string name="change_language">Ubah Bahasa</string>
+    <string name="no_data">Data tidak ditemukan</string>
+</resources>

@@ -11,14 +11,17 @@ import com.zairussalamdev.gitbox.services.GithubApiInterface
 import com.zairussalamdev.gitbox.services.RetrofitService
 
 class DetailViewModel : ViewModel() {
+    private val loading = MutableLiveData<Boolean>()
     private val apiService = RetrofitService.getInstance().create(GithubApiInterface::class.java)
     private val repository = GithubUserRepository.getInstance(apiService)
     private val userDetail = MutableLiveData<UserDetail>()
 
     fun getUserDetail(username: String): LiveData<UserDetail> {
+        loading.postValue(true)
         repository.getUserDetail(username, object : UserCallback<UserDetail> {
             override fun onSuccess(data: UserDetail) {
                 userDetail.postValue(data)
+                loading.postValue(false)
             }
 
             override fun onError(error: String) {}
@@ -27,10 +30,12 @@ class DetailViewModel : ViewModel() {
     }
 
     fun getUserFollowers(username: String): LiveData<List<User>> {
+        loading.postValue(true)
         val result = MutableLiveData<List<User>>()
         repository.getUserFollowers(username, object : UserCallback<List<User>> {
             override fun onSuccess(data: List<User>) {
                 result.postValue(data)
+                loading.postValue(false)
             }
 
             override fun onError(error: String) {}
@@ -39,14 +44,18 @@ class DetailViewModel : ViewModel() {
     }
 
     fun getUserFollowing(username: String): LiveData<List<User>> {
+        loading.postValue(true)
         val result = MutableLiveData<List<User>>()
         repository.getUserFollowing(username, object : UserCallback<List<User>> {
             override fun onSuccess(data: List<User>) {
                 result.postValue(data)
+                loading.postValue(false)
             }
 
             override fun onError(error: String) {}
         })
         return result
     }
+
+    fun getLoading(): LiveData<Boolean> = loading
 }

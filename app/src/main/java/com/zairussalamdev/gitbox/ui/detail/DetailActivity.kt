@@ -1,6 +1,7 @@
 package com.zairussalamdev.gitbox.ui.detail
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import coil.load
@@ -27,25 +28,27 @@ class DetailActivity : AppCompatActivity() {
         val username = intent.getStringExtra(EXTRA_USER) ?: ""
         val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())
                 .get(DetailViewModel::class.java)
+        viewModel.getUserDetail(username).observe(this, {
+            with(binding) {
+                userName.text = it.name
+                userUsername.text = it.username
+                userRepository.text = it.repository.toString()
+                userFollower.text = it.followers.toString()
+                userFollowing.text = it.following.toString()
+                userCompany.text = it.company
+                userLocation.text = it.location
 
-        username.let {
-            viewModel.getUserDetail(username).observe(this, {
-                with(binding) {
-                    userName.text = it.name
-                    userUsername.text = it.username
-                    userRepository.text = it.repository.toString()
-                    userFollower.text = it.followers.toString()
-                    userFollowing.text = it.following.toString()
-                    userCompany.text = it.company
-                    userLocation.text = it.location
-
-                    userImage.load(it.avatar) {
-                        crossfade(true)
-                        transformations(CircleCropTransformation())
-                    }
+                userImage.load(it.avatar) {
+                    crossfade(true)
+                    transformations(CircleCropTransformation())
                 }
-            })
-        }
+            }
+        })
+
+        viewModel.getLoading().observe(this, {
+            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+        })
+
         with(binding) {
             viewpager.adapter = ViewPagerAdapter(this@DetailActivity, username)
             TabLayoutMediator(tabs, viewpager) { tab, position ->

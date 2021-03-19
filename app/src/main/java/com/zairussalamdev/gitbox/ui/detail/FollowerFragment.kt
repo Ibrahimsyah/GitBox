@@ -16,7 +16,7 @@ class FollowerFragment : Fragment() {
 
     companion object {
         const val ARG_USERNAME = "ARG_USERNAME"
-        const val ARG_ISFOLLOWERS = "ARG_ISFOLLOWERS"
+        const val ARG_IS_FOLLOWERS = "ARG_IS_FOLLOWERS"
     }
 
     private lateinit var binding: FragmentFollowerBinding
@@ -32,7 +32,7 @@ class FollowerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val username = arguments?.getString(ARG_USERNAME) ?: ""
-        val isFollower = arguments?.getBoolean(ARG_ISFOLLOWERS) ?: true
+        val isFollower = arguments?.getBoolean(ARG_IS_FOLLOWERS) ?: true
 
         val userAdapter = GithubUserAdapter {}
         with(binding.rvFollowers) {
@@ -50,6 +50,10 @@ class FollowerFragment : Fragment() {
 
         users.observe(viewLifecycleOwner, {
             userAdapter.setUserList(it)
+        })
+
+        viewModel.getLoading().observe(viewLifecycleOwner, {
+            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         })
     }
 }
