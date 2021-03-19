@@ -2,13 +2,13 @@
     <string name="app_name">GitBox</string>
     <string name="github_logo">Github Logo</string>
     <string name="user_image">User Image</string>
-    <string name="Repository">Repository</string>
-    <string name="Followers">Followers</string>
-    <string name="Followings">Following</string>
+    <string name="repository">Repository</string>
+    <string name="followers">Followers</string>
+    <string name="followings">Following</string>
     <string name="Status">Status</string>
     <string name="company">Company</string>
     <string name="location">Location</string>
-    <string name="anyNumber">1000</string>
+    <string name="any_number">1000</string>
     <string name="username">username</string>
     <string name="url">url</string>
     <string name="name">Name</string>

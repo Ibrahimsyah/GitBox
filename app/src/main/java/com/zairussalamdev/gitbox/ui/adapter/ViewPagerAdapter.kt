@@ -7,7 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.zairussalamdev.gitbox.ui.detail.FollowerFragment
 
 class ViewPagerAdapter(
-        private val activity: AppCompatActivity,
+        activity: AppCompatActivity,
         private val username: String
 ) : FragmentStateAdapter(activity) {
     override fun getItemCount(): Int = 2
