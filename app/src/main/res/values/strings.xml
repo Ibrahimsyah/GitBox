@@ -16,12 +16,8 @@
     <string name="no_data">No Data Found</string>
     <string name="favorite">Favorite</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="favorite_activity">Favorite User List</string>
 
-    <!-- Preference Titles -->
-
-    <!-- Messages Preferences -->
-
-    <!-- Sync Preferences -->
     <string name="daily_notification">Daily Reminder Notification</string>
     <string name="daily_notification_on">Daily Reminder Notification at 9 AM Enabled</string>
     <string name="daily_notification_off">Daily Reminder Notification at 9 AM Disabled</string>

@@ -20,7 +20,9 @@ class ViewModelFactory(private val repository: GithubUserRepository) :
         fun getInstance(context: Context): ViewModelFactory {
             val userDao = GitBoxDatabase.getInstance(context).userDao()
             val apiService = RetrofitService.getInstance().create(GithubApiInterface::class.java)
-            val repository = GithubUserRepository.getInstance(apiService, userDao)
+            val contentResolver = context.contentResolver
+            val repository = GithubUserRepository.getInstance(apiService, userDao, contentResolver)
+
             if (instance == null) {
                 synchronized(this) {
                     instance = ViewModelFactory(repository)

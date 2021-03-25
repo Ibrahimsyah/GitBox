@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.zairussalamdev.gitbox.R
 import com.zairussalamdev.gitbox.databinding.ActivityFavoriteBinding
 import com.zairussalamdev.gitbox.ui.adapter.GithubUserAdapter
 import com.zairussalamdev.gitbox.ui.detail.DetailActivity
@@ -17,6 +18,7 @@ class FavoriteActivity : AppCompatActivity() {
         val binding = ActivityFavoriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setTitle(R.string.favorite_activity)
 
         val factory = ViewModelFactory.getInstance(this)
         val viewModel = ViewModelProvider(this, factory).get(FavoriteViewModel::class.java)

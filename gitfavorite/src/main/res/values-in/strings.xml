@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GitFavorite</string>
+    <string name="user_image">Gambar User</string>
+    <string name="url">url</string>
+    <string name="name">Nama</string>
+</resources>

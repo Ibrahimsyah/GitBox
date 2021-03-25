@@ -10,7 +10,7 @@ import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-const val apiKey = "${BuildConfig.GITHUB_API_KEY1}${BuildConfig.GITHUB_API_KEY2}"
+const val apiKey = BuildConfig.GITHUB_API_KEY
 
 interface GithubApiInterface {
     @Headers("Authorization: token $apiKey")

@@ -17,9 +17,11 @@
     <string name="change_language_summary">Ubah Bahasa Aplikai</string>
     <string name="favorite">Favorit</string>
     <string name="title_activity_settings">Pengaturan</string>
+    <string name="favorite_activity">Daftar User Favorit</string>
+
     <string name="daily_notification">Notifikasi Pengingat Harian</string>
     <string name="daily_notification_on">Notifikasi harian pukul 9 telah aktif</string>
     <string name="daily_notification_off">Notifikasi harian pukul 9 nonaktif</string>
-    <string name="insert_favorite_success">User di Tambahkan ke Favorite</string>
-    <string name="remove_favorite_success">User di Hapus dari Favorite</string>
+    <string name="insert_favorite_success">User di Tambahkan ke Favorit</string>
+    <string name="remove_favorite_success">User di Hapus dari Favorit</string>
 </resources>

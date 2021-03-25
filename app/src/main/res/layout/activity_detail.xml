@@ -88,7 +88,6 @@
                     tools:text="@string/location" />
 
                 <LinearLayout
-                    android:id="@+id/follower"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -143,7 +142,6 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/following"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"

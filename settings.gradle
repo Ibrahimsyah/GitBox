@@ -1,2 +1,3 @@
+include ':gitfavorite'
 include ':app'
 rootProject.name = "GitBox"

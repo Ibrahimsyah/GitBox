@@ -1,6 +1,8 @@
 package com.zairussalamdev.gitbox.data
 
+import android.content.ContentResolver
 import androidx.lifecycle.LiveData
+import com.zairussalamdev.gitbox.configs.Provider.Companion.CONTENT_URI
 import com.zairussalamdev.gitbox.data.entities.User
 import com.zairussalamdev.gitbox.data.entities.UserDetail
 import com.zairussalamdev.gitbox.data.entities.UserSearchResponse
@@ -15,13 +17,18 @@ import retrofit2.Response
 
 class GithubUserRepository(
     private val apiService: GithubApiInterface,
-    private val userDao: UserDao
+    private val userDao: UserDao,
+    private val contentResolver: ContentResolver
 ) {
     companion object {
         private var instance: GithubUserRepository? = null
-        fun getInstance(apiService: GithubApiInterface, userDao: UserDao): GithubUserRepository {
+        fun getInstance(
+            apiService: GithubApiInterface,
+            userDao: UserDao,
+            contentResolver: ContentResolver
+        ): GithubUserRepository {
             if (instance == null) {
-                instance = GithubUserRepository(apiService, userDao)
+                instance = GithubUserRepository(apiService, userDao, contentResolver)
             }
             return instance as GithubUserRepository
         }
@@ -104,12 +111,14 @@ class GithubUserRepository(
         GlobalScope.launch(Dispatchers.IO) {
             userDao.insert(user)
         }
+        contentResolver.notifyChange(CONTENT_URI, null)
     }
 
     fun deleteFavoriteUser(user: User) {
         GlobalScope.launch(Dispatchers.IO) {
             userDao.delete(user)
         }
+        contentResolver.notifyChange(CONTENT_URI, null)
     }
 
     fun checkUserFavorite(name: String): LiveData<Boolean> = userDao.checkAvailability(name)
