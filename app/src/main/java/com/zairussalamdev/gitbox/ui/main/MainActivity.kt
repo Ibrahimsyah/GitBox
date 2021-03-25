@@ -16,6 +16,7 @@ import com.zairussalamdev.gitbox.databinding.ActivityMainBinding
 import com.zairussalamdev.gitbox.ui.SettingsActivity
 import com.zairussalamdev.gitbox.ui.adapter.GithubUserAdapter
 import com.zairussalamdev.gitbox.ui.detail.DetailActivity
+import com.zairussalamdev.gitbox.ui.favorite.FavoriteActivity
 import com.zairussalamdev.gitbox.utils.ViewModelFactory
 
 class MainActivity : AppCompatActivity() {
@@ -95,6 +96,10 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.menu_change_language -> {
                 val intent = Intent(this@MainActivity, SettingsActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.menu_favorite -> {
+                val intent = Intent(this@MainActivity, FavoriteActivity::class.java)
                 startActivity(intent)
             }
         }

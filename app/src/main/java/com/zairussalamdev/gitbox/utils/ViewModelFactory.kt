@@ -8,6 +8,7 @@ import com.zairussalamdev.gitbox.database.GitBoxDatabase
 import com.zairussalamdev.gitbox.services.GithubApiInterface
 import com.zairussalamdev.gitbox.services.RetrofitService
 import com.zairussalamdev.gitbox.ui.detail.DetailViewModel
+import com.zairussalamdev.gitbox.ui.favorite.FavoriteViewModel
 import com.zairussalamdev.gitbox.ui.main.MainViewModel
 
 class ViewModelFactory(private val repository: GithubUserRepository) :
@@ -34,6 +35,8 @@ class ViewModelFactory(private val repository: GithubUserRepository) :
         return when {
             modelClass.isAssignableFrom(MainViewModel::class.java) -> MainViewModel(repository) as T
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> DetailViewModel(repository) as T
+            modelClass.isAssignableFrom(FavoriteViewModel::class.java) ->
+                FavoriteViewModel(repository) as T
             else -> MainViewModel(repository) as T
         }
     }

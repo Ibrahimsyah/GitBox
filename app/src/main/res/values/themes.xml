@@ -13,7 +13,7 @@
         <item name="android:textColor">@color/github_black</item>
     </style>
 
-    <style name="SettingActivityTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="ActivityWithActionBarTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="colorControlActivated" tools:targetApi="l">@color/github_black</item>
         <item name="android:statusBarColor" tools:targetApi="l">@color/github_black</item>
         <item name="colorPrimary">@color/github_black</item>

@@ -99,6 +99,7 @@ class GithubUserRepository(
         })
     }
 
+    fun getFavoriteUsers(): LiveData<List<User>> = userDao.getAll()
     fun addFavoriteUser(user: User) {
         GlobalScope.launch(Dispatchers.IO) {
             userDao.insert(user)
