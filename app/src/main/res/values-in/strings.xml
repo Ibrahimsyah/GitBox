@@ -14,4 +14,10 @@
     <string name="search">Cari Pengguna Github</string>
     <string name="change_language">Ubah Bahasa</string>
     <string name="no_data">Data tidak ditemukan</string>
+    <string name="change_language_summary">Ubah Bahasa Aplikai</string>
+    <string name="favorite">Favorit</string>
+    <string name="title_activity_settings">Pengaturan</string>
+    <string name="daily_notification">Notifikasi Pengingat Harian</string>
+    <string name="daily_notification_on">Notifikasi harian pukul 9 telah aktif</string>
+    <string name="daily_notification_off">Notifikasi harian pukul 9 nonaktif</string>
 </resources>

@@ -9,8 +9,15 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="collapseActionView|always" />
     <item
+        android:id="@+id/menu_favorite"
+        android:contentDescription="@string/favorite"
+        android:icon="@drawable/ic_favorite_active"
+        android:title="@string/favorite"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/menu_change_language"
+        android:icon="@drawable/ic_settings"
         android:contentDescription="@string/change_language"
         android:title="@string/change_language"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 </menu>

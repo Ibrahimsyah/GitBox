@@ -1,0 +1,17 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:iconSpaceReserved="false">
+
+    <Preference
+        app:icon="@drawable/ic_setting_language"
+        app:key="pref_language"
+        app:summary="@string/change_language_summary"
+        app:title="@string/change_language" />
+
+    <SwitchPreferenceCompat
+        app:icon="@drawable/ic_setting_notification"
+        app:key="sync"
+        app:summaryOff="@string/daily_notification_off"
+        app:summaryOn="@string/daily_notification_on"
+        app:title="@string/daily_notification" />
+
+</PreferenceScreen>

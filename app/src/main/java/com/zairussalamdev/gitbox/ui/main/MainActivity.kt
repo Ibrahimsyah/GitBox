@@ -4,7 +4,6 @@ import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -14,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zairussalamdev.gitbox.R
 import com.zairussalamdev.gitbox.databinding.ActivityMainBinding
+import com.zairussalamdev.gitbox.ui.SettingsActivity
 import com.zairussalamdev.gitbox.ui.adapter.GithubUserAdapter
 import com.zairussalamdev.gitbox.ui.detail.DetailActivity
 
@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_change_language -> {
-                val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
+                val intent = Intent(this@MainActivity, SettingsActivity::class.java)
                 startActivity(intent)
             }
         }
