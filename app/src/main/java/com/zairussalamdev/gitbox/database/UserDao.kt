@@ -17,7 +17,7 @@ interface UserDao {
     fun getAllAsCursor(): Cursor
 
     @Query("select count(*) != 0 from users u where u.username = :username")
-    fun getByUsername(username: String): LiveData<Boolean>
+    fun checkAvailability(username: String): LiveData<Boolean>
 
     @Insert
     fun insert(user: User)

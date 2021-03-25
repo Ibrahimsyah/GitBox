@@ -11,6 +11,7 @@ import com.zairussalamdev.gitbox.data.entities.UserDetail
 class DetailViewModel(private val repository: GithubUserRepository) : ViewModel() {
     private val loading = MutableLiveData<Boolean>()
     private val userDetail = MutableLiveData<UserDetail>()
+    private val isFavorite = MutableLiveData<Boolean>()
 
     fun getUserDetail(username: String): LiveData<UserDetail> {
         loading.postValue(true)
@@ -54,4 +55,20 @@ class DetailViewModel(private val repository: GithubUserRepository) : ViewModel(
     }
 
     fun getLoading(): LiveData<Boolean> = loading
+
+    fun getUserIsFavorite(name: String): LiveData<Boolean> {
+        val result = repository.checkUserFavorite(name)
+        isFavorite.postValue(result.value)
+        return result
+    }
+
+    fun addUserToFavorite(user: User) {
+        repository.addFavoriteUser(user)
+        getUserIsFavorite(user.username)
+    }
+
+    fun removeUserFromFavorite(user: User) {
+        repository.deleteFavoriteUser(user)
+        getUserIsFavorite(user.username)
+    }
 }

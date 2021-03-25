@@ -9,6 +9,7 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.google.android.material.tabs.TabLayoutMediator
 import com.zairussalamdev.gitbox.R
+import com.zairussalamdev.gitbox.data.entities.User
 import com.zairussalamdev.gitbox.data.entities.UserDetail
 import com.zairussalamdev.gitbox.databinding.ActivityDetailBinding
 import com.zairussalamdev.gitbox.ui.adapter.ViewPagerAdapter
@@ -25,6 +26,7 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var user: UserDetail
     private lateinit var viewModel: DetailViewModel
+    private var isFavorite = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,17 +59,30 @@ class DetailActivity : AppCompatActivity() {
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         })
 
+        viewModel.getUserIsFavorite(username).observe(this, {
+            isFavorite = it
+            binding.fabFavorite.setImageResource(
+                if (it) R.drawable.ic_favorite_active
+                else R.drawable.ic_favorite_inactive
+            )
+        })
+
         with(binding) {
             viewpager.adapter = ViewPagerAdapter(this@DetailActivity, username)
             TabLayoutMediator(tabs, viewpager) { tab, position ->
                 tab.text = resources.getString(TAB_TITLES[position])
             }.attach()
-
-            fabFavorite.setOnClickListener { handleFavoriteClick() }
+            fabFavorite.setOnClickListener {
+                val user = User(user.username, user.avatar, user.url)
+                val result = if (isFavorite) {
+                    viewModel.removeUserFromFavorite(user)
+                    resources.getString(R.string.remove_favorite_success)
+                } else {
+                    viewModel.addUserToFavorite(user)
+                    resources.getString(R.string.insert_favorite_success)
+                }
+                Toast.makeText(this@DetailActivity, result, Toast.LENGTH_SHORT).show()
+            }
         }
-    }
-
-    private fun handleFavoriteClick() {
-        Toast.makeText(this, "${user.name} Clicked!", Toast.LENGTH_SHORT).show()
     }
 }

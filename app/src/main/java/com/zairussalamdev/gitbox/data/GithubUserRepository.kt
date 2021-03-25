@@ -1,10 +1,14 @@
 package com.zairussalamdev.gitbox.data
 
+import androidx.lifecycle.LiveData
 import com.zairussalamdev.gitbox.data.entities.User
 import com.zairussalamdev.gitbox.data.entities.UserDetail
 import com.zairussalamdev.gitbox.data.entities.UserSearchResponse
 import com.zairussalamdev.gitbox.database.UserDao
 import com.zairussalamdev.gitbox.services.GithubApiInterface
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -94,6 +98,20 @@ class GithubUserRepository(
 
         })
     }
+
+    fun addFavoriteUser(user: User) {
+        GlobalScope.launch(Dispatchers.IO) {
+            userDao.insert(user)
+        }
+    }
+
+    fun deleteFavoriteUser(user: User) {
+        GlobalScope.launch(Dispatchers.IO) {
+            userDao.delete(user)
+        }
+    }
+
+    fun checkUserFavorite(name: String): LiveData<Boolean> = userDao.checkAvailability(name)
 }
 
 interface UserCallback<T> {

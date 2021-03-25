@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class UserDetail(
         @SerializedName("login")
-        val username: String? = "",
+        val username: String = "",
 
         @SerializedName("avatar_url")
         val avatar: String? = "",
