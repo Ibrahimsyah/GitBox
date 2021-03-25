@@ -6,12 +6,8 @@ import androidx.lifecycle.ViewModel
 import com.zairussalamdev.gitbox.data.GithubUserRepository
 import com.zairussalamdev.gitbox.data.UserCallback
 import com.zairussalamdev.gitbox.data.entities.User
-import com.zairussalamdev.gitbox.services.GithubApiInterface
-import com.zairussalamdev.gitbox.services.RetrofitService
 
-class MainViewModel : ViewModel() {
-    private val apiService = RetrofitService.getInstance().create(GithubApiInterface::class.java)
-    private val repository = GithubUserRepository.getInstance(apiService)
+class MainViewModel(private val repository: GithubUserRepository) : ViewModel() {
     private val loading = MutableLiveData(false)
     private val userList = MutableLiveData<List<User>>()
     private val errorMessage = MutableLiveData("")

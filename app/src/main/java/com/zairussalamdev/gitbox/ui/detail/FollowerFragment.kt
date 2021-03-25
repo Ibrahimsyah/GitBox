@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.zairussalamdev.gitbox.data.entities.User
 import com.zairussalamdev.gitbox.databinding.FragmentFollowerBinding
 import com.zairussalamdev.gitbox.ui.adapter.GithubUserAdapter
+import com.zairussalamdev.gitbox.utils.ViewModelFactory
 
 class FollowerFragment : Fragment() {
 
@@ -41,12 +42,12 @@ class FollowerFragment : Fragment() {
             adapter = userAdapter
         }
 
-        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())
-                .get(DetailViewModel::class.java)
+        val factory = ViewModelFactory.getInstance(view.context)
+        val viewModel = ViewModelProvider(this, factory).get(DetailViewModel::class.java)
 
         val users: LiveData<List<User>> =
-                if (isFollower) viewModel.getUserFollowers(username)
-                else viewModel.getUserFollowing(username)
+            if (isFollower) viewModel.getUserFollowers(username)
+            else viewModel.getUserFollowing(username)
 
         users.observe(viewLifecycleOwner, {
             userAdapter.setUserList(it)

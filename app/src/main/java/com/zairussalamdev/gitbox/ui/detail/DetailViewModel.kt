@@ -7,13 +7,9 @@ import com.zairussalamdev.gitbox.data.GithubUserRepository
 import com.zairussalamdev.gitbox.data.UserCallback
 import com.zairussalamdev.gitbox.data.entities.User
 import com.zairussalamdev.gitbox.data.entities.UserDetail
-import com.zairussalamdev.gitbox.services.GithubApiInterface
-import com.zairussalamdev.gitbox.services.RetrofitService
 
-class DetailViewModel : ViewModel() {
+class DetailViewModel(private val repository: GithubUserRepository) : ViewModel() {
     private val loading = MutableLiveData<Boolean>()
-    private val apiService = RetrofitService.getInstance().create(GithubApiInterface::class.java)
-    private val repository = GithubUserRepository.getInstance(apiService)
     private val userDetail = MutableLiveData<UserDetail>()
 
     fun getUserDetail(username: String): LiveData<UserDetail> {

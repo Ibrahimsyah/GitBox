@@ -9,6 +9,9 @@ data class UserDetail(
         @SerializedName("avatar_url")
         val avatar: String? = "",
 
+        @SerializedName("html_url")
+        val url: String? = "",
+
         @SerializedName("name")
         val name: String? = "",
 

@@ -12,6 +12,7 @@ import com.zairussalamdev.gitbox.R
 import com.zairussalamdev.gitbox.data.entities.UserDetail
 import com.zairussalamdev.gitbox.databinding.ActivityDetailBinding
 import com.zairussalamdev.gitbox.ui.adapter.ViewPagerAdapter
+import com.zairussalamdev.gitbox.utils.ViewModelFactory
 
 class DetailActivity : AppCompatActivity() {
     companion object {
@@ -31,8 +32,9 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val username = intent.getStringExtra(EXTRA_USER) ?: ""
-        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())
-            .get(DetailViewModel::class.java)
+
+        val factory = ViewModelFactory.getInstance(this)
+        viewModel = ViewModelProvider(this, factory).get(DetailViewModel::class.java)
         viewModel.getUserDetail(username).observe(this, {
             user = it
             with(binding) {

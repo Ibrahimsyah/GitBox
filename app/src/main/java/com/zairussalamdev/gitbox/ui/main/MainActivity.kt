@@ -16,6 +16,7 @@ import com.zairussalamdev.gitbox.databinding.ActivityMainBinding
 import com.zairussalamdev.gitbox.ui.SettingsActivity
 import com.zairussalamdev.gitbox.ui.adapter.GithubUserAdapter
 import com.zairussalamdev.gitbox.ui.detail.DetailActivity
+import com.zairussalamdev.gitbox.utils.ViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,8 +42,8 @@ class MainActivity : AppCompatActivity() {
             adapter = githubUserAdapter
         }
 
-        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())
-                .get(MainViewModel::class.java)
+        val factory = ViewModelFactory.getInstance(this)
+        viewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
 
         viewModel.getSearchQuery().observe(this, { query ->
             if (query.isEmpty()) {

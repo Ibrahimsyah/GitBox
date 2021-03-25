@@ -3,17 +3,21 @@ package com.zairussalamdev.gitbox.data
 import com.zairussalamdev.gitbox.data.entities.User
 import com.zairussalamdev.gitbox.data.entities.UserDetail
 import com.zairussalamdev.gitbox.data.entities.UserSearchResponse
+import com.zairussalamdev.gitbox.database.UserDao
 import com.zairussalamdev.gitbox.services.GithubApiInterface
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class GithubUserRepository(private val apiService: GithubApiInterface) {
+class GithubUserRepository(
+    private val apiService: GithubApiInterface,
+    private val userDao: UserDao
+) {
     companion object {
         private var instance: GithubUserRepository? = null
-        fun getInstance(apiService: GithubApiInterface): GithubUserRepository {
+        fun getInstance(apiService: GithubApiInterface, userDao: UserDao): GithubUserRepository {
             if (instance == null) {
-                instance = GithubUserRepository(apiService)
+                instance = GithubUserRepository(apiService, userDao)
             }
             return instance as GithubUserRepository
         }
