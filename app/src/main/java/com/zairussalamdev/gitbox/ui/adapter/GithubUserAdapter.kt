@@ -26,8 +26,8 @@ class GithubUserAdapter(
                 }
                 userName.text = user.username
                 userUrl.text = user.url
-                itemView.setOnClickListener { listener(user) }
             }
+            itemView.setOnClickListener { listener(user) }
         }
     }
 
