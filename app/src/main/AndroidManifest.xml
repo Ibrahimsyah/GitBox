@@ -20,6 +20,26 @@
         android:theme="@style/Theme.GitBox"
         tools:ignore="AllowBackup">
 
+        <receiver
+            android:name=".services.notification.AlarmReceiver"
+            android:enabled="true"
+            android:exported="true"
+            tools:ignore="ExportedReceiver" />
+
+        <receiver android:name=".widget.FavoriteStackWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/favorite_stack_widget_info" />
+        </receiver>
+
+        <service
+            android:name="com.zairussalamdev.gitbox.widget.StackWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
         <provider
             android:name=".provider.UserProvider"
             android:authorities="com.zairussalamdev.gitbox"
@@ -51,11 +71,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.main.MainActivity" />
-
-        <receiver
-            android:name=".services.notification.AlarmReceiver"
-            android:enabled="true"
-            android:exported="true"
-            tools:ignore="ExportedReceiver" />
     </application>
+
 </manifest>

@@ -16,6 +16,12 @@ interface UserDao {
     @Query("select * from users")
     fun getAllAsCursor(): Cursor
 
+    @Query("select * from users")
+    fun getAllAsList(): List<User>
+
+    @Query("select count(*) from users")
+    fun getCount(): LiveData<Int>
+
     @Query("select count(*) != 0 from users u where u.username = :username")
     fun checkAvailability(username: String): LiveData<Boolean>
 

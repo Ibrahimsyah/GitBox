@@ -1,5 +1,6 @@
 package com.zairussalamdev.gitbox.ui.detail
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -14,6 +15,7 @@ import com.zairussalamdev.gitbox.data.entities.UserDetail
 import com.zairussalamdev.gitbox.databinding.ActivityDetailBinding
 import com.zairussalamdev.gitbox.ui.adapter.ViewPagerAdapter
 import com.zairussalamdev.gitbox.utils.ViewModelFactory
+import com.zairussalamdev.gitbox.widget.FavoriteStackWidget
 
 class DetailActivity : AppCompatActivity() {
     companion object {
@@ -82,6 +84,9 @@ class DetailActivity : AppCompatActivity() {
                     resources.getString(R.string.insert_favorite_success)
                 }
                 Toast.makeText(this@DetailActivity, result, Toast.LENGTH_SHORT).show()
+                val intent = Intent(this@DetailActivity, FavoriteStackWidget::class.java)
+                intent.action = FavoriteStackWidget.WIDGET_UPDATE
+                sendBroadcast(intent)
             }
         }
     }
