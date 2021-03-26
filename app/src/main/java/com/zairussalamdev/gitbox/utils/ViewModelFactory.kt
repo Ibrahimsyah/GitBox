@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.zairussalamdev.gitbox.data.GithubUserRepository
 import com.zairussalamdev.gitbox.database.GitBoxDatabase
-import com.zairussalamdev.gitbox.services.GithubApiInterface
-import com.zairussalamdev.gitbox.services.RetrofitService
+import com.zairussalamdev.gitbox.services.api.GithubApiInterface
+import com.zairussalamdev.gitbox.services.api.RetrofitService
 import com.zairussalamdev.gitbox.ui.detail.DetailViewModel
 import com.zairussalamdev.gitbox.ui.favorite.FavoriteViewModel
 import com.zairussalamdev.gitbox.ui.main.MainViewModel

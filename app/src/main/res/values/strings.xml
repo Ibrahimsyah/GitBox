@@ -23,4 +23,6 @@
     <string name="daily_notification_off">Daily Reminder Notification at 9 AM Disabled</string>
     <string name="insert_favorite_success">User Added as Favorite</string>
     <string name="remove_favorite_success">User Removed from Favorite</string>
+
+    <string name="notification_content">Hey There! It is time to visit GitBox App!</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.zairussalamdev.gitbox.services
+package com.zairussalamdev.gitbox.services.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

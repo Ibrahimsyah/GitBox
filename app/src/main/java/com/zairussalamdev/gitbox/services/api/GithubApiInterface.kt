@@ -1,4 +1,4 @@
-package com.zairussalamdev.gitbox.services
+package com.zairussalamdev.gitbox.services.api
 
 import com.zairussalamdev.gitbox.BuildConfig
 import com.zairussalamdev.gitbox.data.entities.User

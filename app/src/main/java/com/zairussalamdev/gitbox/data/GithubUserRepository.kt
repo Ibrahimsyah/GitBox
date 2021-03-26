@@ -7,7 +7,7 @@ import com.zairussalamdev.gitbox.data.entities.User
 import com.zairussalamdev.gitbox.data.entities.UserDetail
 import com.zairussalamdev.gitbox.data.entities.UserSearchResponse
 import com.zairussalamdev.gitbox.database.UserDao
-import com.zairussalamdev.gitbox.services.GithubApiInterface
+import com.zairussalamdev.gitbox.services.api.GithubApiInterface
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

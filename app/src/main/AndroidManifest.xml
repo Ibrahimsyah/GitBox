@@ -4,6 +4,8 @@
     package="com.zairussalamdev.gitbox">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <permission
         android:name="com.zairussalamdev.gitbox.READ_DATABASE"
@@ -19,7 +21,7 @@
         tools:ignore="AllowBackup">
 
         <provider
-            android:name=".services.UserProvider"
+            android:name=".provider.UserProvider"
             android:authorities="com.zairussalamdev.gitbox"
             android:enabled="true"
             android:exported="true"
@@ -49,5 +51,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.main.MainActivity" />
+
+        <receiver
+            android:name=".services.notification.AlarmReceiver"
+            android:enabled="true"
+            android:exported="true"
+            tools:ignore="ExportedReceiver" />
     </application>
 </manifest>

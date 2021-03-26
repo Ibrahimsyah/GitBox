@@ -1,4 +1,4 @@
-package com.zairussalamdev.gitbox.services
+package com.zairussalamdev.gitbox.provider
 
 import android.content.ContentProvider
 import android.content.ContentValues
