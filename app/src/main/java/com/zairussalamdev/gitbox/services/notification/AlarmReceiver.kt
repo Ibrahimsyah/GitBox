@@ -1,5 +1,6 @@
 package com.zairussalamdev.gitbox.services.notification
 
+import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -12,13 +13,12 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.zairussalamdev.gitbox.R
 import com.zairussalamdev.gitbox.ui.main.MainActivity
+import java.util.*
 
 class AlarmReceiver : BroadcastReceiver() {
 
     companion object {
         private const val ALARM_ID = 1001
-        private const val DATE_FORMAT = "yyyy-MM-dd"
-        private const val TIME_FORMAT = "HH:mm"
 
         private const val NOTIFICATION_ID = 1002
         private const val NOTIFICATION_CHANNEL_ID = "channel_1"
@@ -30,7 +30,29 @@ class AlarmReceiver : BroadcastReceiver() {
     }
 
     fun setNotificationAlarm(context: Context, time: String) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(context, AlarmReceiver::class.java)
+        val timeArray = time.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
 
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]))
+        calendar.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]))
+        calendar.set(Calendar.SECOND, 0)
+
+        val pendingIntent = PendingIntent.getBroadcast(context, ALARM_ID, intent, 0)
+        alarmManager.setInexactRepeating(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            AlarmManager.INTERVAL_DAY,
+            pendingIntent
+        )
+    }
+
+    fun unsetNotificationAlarm(context: Context) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(context, AlarmReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(context, ALARM_ID, intent, 0)
+        alarmManager.cancel(pendingIntent)
     }
 
     private fun showReminderNotification(context: Context) {

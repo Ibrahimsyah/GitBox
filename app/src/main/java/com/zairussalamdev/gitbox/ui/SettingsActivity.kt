@@ -1,8 +1,10 @@
 package com.zairussalamdev.gitbox.ui
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -36,7 +38,6 @@ class SettingsActivity : AppCompatActivity() {
 
             val langPreferences = findPreference<Preference>("pref_language")
             val notificationPreference = findPreference<SwitchPreferenceCompat>("pref_notification")
-
             langPreferences?.setOnPreferenceClickListener {
                 val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
                 startActivity(intent)
@@ -44,9 +45,19 @@ class SettingsActivity : AppCompatActivity() {
             }
             notificationPreference?.setOnPreferenceChangeListener { _, newValue ->
                 if (newValue == true) {
-
+                    alarmReceiver.setNotificationAlarm(context as Context, "09:00")
+                    Toast.makeText(
+                        context,
+                        resources.getString(R.string.reminder_notification_set),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else {
-                    //TODO: Deactivate Notification Alarm
+                    alarmReceiver.unsetNotificationAlarm(context as Context)
+                    Toast.makeText(
+                        context,
+                        resources.getString(R.string.reminder_notification_unset),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 true
             }
