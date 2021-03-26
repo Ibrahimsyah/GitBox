@@ -6,7 +6,6 @@ import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.net.toUri
 import com.zairussalamdev.gitbox.R
@@ -50,7 +49,6 @@ class FavoriteStackWidget : AppWidgetProvider() {
         super.onReceive(context, intent)
         if (intent.action != null) {
             if (intent.action == WIDGET_UPDATE) {
-                Log.d("hehe", "DataSetWillBeChanged")
                 val widgetManager = AppWidgetManager.getInstance(context)
                 val widgetIds =
                         widgetManager.getAppWidgetIds(ComponentName(context, FavoriteStackWidget::class.java))

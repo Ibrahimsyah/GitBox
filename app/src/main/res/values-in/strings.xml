@@ -27,4 +27,5 @@
     <string name="notification_content">Hai! Saatnya mengunjungi aplikasi GitBox!</string>
     <string name="reminder_notification_set">Notifikasi pengingat telah di aktifkan untuk jam 9 pagi setiap hari</string>
     <string name="reminder_notification_unset">Notifikasi pengingat telah di matikan</string>
+    <string name="string_favorite_widget">User Favorit</string>
 </resources>

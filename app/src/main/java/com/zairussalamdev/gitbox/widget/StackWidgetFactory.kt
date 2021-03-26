@@ -2,7 +2,6 @@ package com.zairussalamdev.gitbox.widget
 
 import android.content.Context
 import android.graphics.drawable.BitmapDrawable
-import android.util.Log
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import coil.ImageLoader
@@ -12,21 +11,21 @@ import com.zairussalamdev.gitbox.R
 import com.zairussalamdev.gitbox.data.entities.User
 import com.zairussalamdev.gitbox.database.GitBoxDatabase
 import com.zairussalamdev.gitbox.database.UserDao
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 internal class StackWidgetFactory(private val context: Context) :
         RemoteViewsService.RemoteViewsFactory {
-    private var userItems = mutableListOf<User>()
+    private var userItems = listOf<User>()
     private lateinit var userDao: UserDao
 
     override fun onCreate() {
         userDao = GitBoxDatabase.getInstance(context).userDao()
+        fetchUserData()
     }
 
     override fun onDataSetChanged() {
-        Log.d("hehe", "DataSetChanged")
         fetchUserData()
     }
 
@@ -34,7 +33,8 @@ internal class StackWidgetFactory(private val context: Context) :
 
     override fun getCount(): Int = userItems.size
 
-    override fun getViewAt(position: Int): RemoteViews {
+    override fun getViewAt(position: Int): RemoteViews? {
+        if (userItems.isEmpty()) return null
         val user = userItems[position]
         val rv = RemoteViews(context.packageName, R.layout.stack_widget_item)
         rv.setTextViewText(R.id.user_username, user.username)
@@ -63,9 +63,11 @@ internal class StackWidgetFactory(private val context: Context) :
     override fun hasStableIds(): Boolean = false
 
     private fun fetchUserData() {
-        GlobalScope.launch {
-            val users = userDao.getAllAsList()
-            userItems.addAll(users)
+        runBlocking {
+            launch(Dispatchers.IO) {
+                val users = userDao.getAllAsList()
+                userItems = users
+            }
         }
     }
 }
