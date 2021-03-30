@@ -12,6 +12,8 @@ class DetailViewModel(private val repository: GithubUserRepository) : ViewModel(
     private val loading = MutableLiveData<Boolean>()
     private val userDetail = MutableLiveData<UserDetail>()
     private val isFavorite = MutableLiveData<Boolean>()
+    private val followers = MutableLiveData<List<User>>()
+    private val following = MutableLiveData<List<User>>()
 
     fun getUserDetail(username: String): LiveData<UserDetail> {
         loading.postValue(true)
@@ -28,30 +30,32 @@ class DetailViewModel(private val repository: GithubUserRepository) : ViewModel(
 
     fun getUserFollowers(username: String): LiveData<List<User>> {
         loading.postValue(true)
-        val result = MutableLiveData<List<User>>()
-        repository.getUserFollowers(username, object : UserCallback<List<User>> {
-            override fun onSuccess(data: List<User>) {
-                result.postValue(data)
-                loading.postValue(false)
-            }
+        if (followers.value == null) {
+            repository.getUserFollowers(username, object : UserCallback<List<User>> {
+                override fun onSuccess(data: List<User>) {
+                    followers.postValue(data)
+                    loading.postValue(false)
+                }
 
-            override fun onError(error: String) {}
-        })
-        return result
+                override fun onError(error: String) {}
+            })
+        }
+        return followers
     }
 
     fun getUserFollowing(username: String): LiveData<List<User>> {
         loading.postValue(true)
-        val result = MutableLiveData<List<User>>()
-        repository.getUserFollowing(username, object : UserCallback<List<User>> {
-            override fun onSuccess(data: List<User>) {
-                result.postValue(data)
-                loading.postValue(false)
-            }
+        if (following.value == null) {
+            repository.getUserFollowing(username, object : UserCallback<List<User>> {
+                override fun onSuccess(data: List<User>) {
+                    following.postValue(data)
+                    loading.postValue(false)
+                }
 
-            override fun onError(error: String) {}
-        })
-        return result
+                override fun onError(error: String) {}
+            })
+        }
+        return following
     }
 
     fun getLoading(): LiveData<Boolean> = loading

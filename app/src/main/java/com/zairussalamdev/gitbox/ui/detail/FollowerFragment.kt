@@ -51,7 +51,7 @@ class FollowerFragment : Fragment() {
 
         users.observe(viewLifecycleOwner, {
             userAdapter.setUserList(it)
-            binding.tvNoData.visibility = if (it.size == 0) View.VISIBLE else View.GONE
+            binding.tvNoData.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
         })
 
         viewModel.getLoading().observe(viewLifecycleOwner, {
