@@ -35,6 +35,7 @@ class DetailViewModel(private val repository: GithubUserRepository) : ViewModel(
             viewModelScope.launch(Dispatchers.IO) {
                 val result = repository.getUserFollowers(username)
                 followers.postValue(result)
+                loading.postValue(false)
             }
         }
         return followers
@@ -45,7 +46,8 @@ class DetailViewModel(private val repository: GithubUserRepository) : ViewModel(
         if (following.value == null) {
             viewModelScope.launch(Dispatchers.IO) {
                 val result = repository.getUserFollowing(username)
-                followers.postValue(result)
+                following.postValue(result)
+                loading.postValue(false)
             }
         }
         return following
