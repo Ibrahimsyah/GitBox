@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.zairussalamdev.gitbox.data.GithubUserRepository
 import com.zairussalamdev.gitbox.data.entities.User
 import com.zairussalamdev.gitbox.data.entities.UserDetail
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class DetailViewModel(private val repository: GithubUserRepository) : ViewModel() {
@@ -21,7 +20,7 @@ class DetailViewModel(private val repository: GithubUserRepository) : ViewModel(
 
     fun getUserDetail(username: String): LiveData<UserDetail> {
         loading.postValue(true)
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             val result = repository.getUserDetail(username)
             userDetail.postValue(result)
             loading.postValue(false)
@@ -32,7 +31,7 @@ class DetailViewModel(private val repository: GithubUserRepository) : ViewModel(
     fun getUserFollowers(username: String): LiveData<List<User>> {
         loading.postValue(true)
         if (followers.value == null) {
-            viewModelScope.launch(Dispatchers.IO) {
+            viewModelScope.launch {
                 val result = repository.getUserFollowers(username)
                 followers.postValue(result)
                 loading.postValue(false)
@@ -44,7 +43,7 @@ class DetailViewModel(private val repository: GithubUserRepository) : ViewModel(
     fun getUserFollowing(username: String): LiveData<List<User>> {
         loading.postValue(true)
         if (following.value == null) {
-            viewModelScope.launch(Dispatchers.IO) {
+            viewModelScope.launch {
                 val result = repository.getUserFollowing(username)
                 following.postValue(result)
                 loading.postValue(false)

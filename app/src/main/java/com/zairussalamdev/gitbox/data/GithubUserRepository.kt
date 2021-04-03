@@ -28,15 +28,15 @@ class GithubUserRepository(
         }
     }
 
-    suspend fun getAllUser() = apiService.getAllUsers()
+    suspend fun getAllUser() = withContext(Dispatchers.IO) { apiService.getAllUsers() }
 
-    suspend fun searchUsers(query: String) = apiService.searchUser(query)
+    suspend fun searchUsers(query: String) = withContext(Dispatchers.IO) { apiService.searchUser(query) }
 
-    suspend fun getUserDetail(username: String) = apiService.getUserDetail(username)
+    suspend fun getUserDetail(username: String) = withContext(Dispatchers.IO) { apiService.getUserDetail(username) }
 
-    suspend fun getUserFollowers(username: String) = apiService.getUserFollowers(username)
+    suspend fun getUserFollowers(username: String) = withContext(Dispatchers.IO) { apiService.getUserFollowers(username) }
 
-    suspend fun getUserFollowing(username: String) = apiService.getUserFollowing(username)
+    suspend fun getUserFollowing(username: String) = withContext(Dispatchers.IO) { apiService.getUserFollowing(username) }
 
     fun getFavoriteUsers(): LiveData<List<User>> = userDao.getAll()
 

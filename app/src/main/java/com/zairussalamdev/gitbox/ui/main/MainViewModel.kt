@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zairussalamdev.gitbox.data.GithubUserRepository
 import com.zairussalamdev.gitbox.data.entities.User
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val repository: GithubUserRepository) : ViewModel() {
@@ -22,7 +21,7 @@ class MainViewModel(private val repository: GithubUserRepository) : ViewModel() 
 
     fun getAllUsers() {
         setLoading(true)
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             try {
                 val users = repository.getAllUser()
                 userList.postValue(users)
