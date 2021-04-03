@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity() {
         })
 
         viewModel.getUsers().observe(this, {
-            viewModel.setLoading(false)
             githubUserAdapter.setUserList(it)
             if (it.isEmpty()) {
                 viewModel.setErrorMessage(resources.getString(R.string.no_data))

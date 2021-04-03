@@ -3,10 +3,12 @@ package com.zairussalamdev.gitbox.ui.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.zairussalamdev.gitbox.data.GithubUserRepository
-import com.zairussalamdev.gitbox.data.UserCallback
 import com.zairussalamdev.gitbox.data.entities.User
 import com.zairussalamdev.gitbox.data.entities.UserDetail
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class DetailViewModel(private val repository: GithubUserRepository) : ViewModel() {
     private val loading = MutableLiveData<Boolean>()
@@ -15,30 +17,25 @@ class DetailViewModel(private val repository: GithubUserRepository) : ViewModel(
     private val followers = MutableLiveData<List<User>>()
     private val following = MutableLiveData<List<User>>()
 
+    fun getLoading() = loading
+
     fun getUserDetail(username: String): LiveData<UserDetail> {
         loading.postValue(true)
-        repository.getUserDetail(username, object : UserCallback<UserDetail> {
-            override fun onSuccess(data: UserDetail) {
-                userDetail.postValue(data)
-                loading.postValue(false)
-            }
-
-            override fun onError(error: String) {}
-        })
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = repository.getUserDetail(username)
+            userDetail.postValue(result)
+            loading.postValue(false)
+        }
         return userDetail
     }
 
     fun getUserFollowers(username: String): LiveData<List<User>> {
         loading.postValue(true)
         if (followers.value == null) {
-            repository.getUserFollowers(username, object : UserCallback<List<User>> {
-                override fun onSuccess(data: List<User>) {
-                    followers.postValue(data)
-                    loading.postValue(false)
-                }
-
-                override fun onError(error: String) {}
-            })
+            viewModelScope.launch(Dispatchers.IO) {
+                val result = repository.getUserFollowers(username)
+                followers.postValue(result)
+            }
         }
         return followers
     }
@@ -46,19 +43,13 @@ class DetailViewModel(private val repository: GithubUserRepository) : ViewModel(
     fun getUserFollowing(username: String): LiveData<List<User>> {
         loading.postValue(true)
         if (following.value == null) {
-            repository.getUserFollowing(username, object : UserCallback<List<User>> {
-                override fun onSuccess(data: List<User>) {
-                    following.postValue(data)
-                    loading.postValue(false)
-                }
-
-                override fun onError(error: String) {}
-            })
+            viewModelScope.launch(Dispatchers.IO) {
+                val result = repository.getUserFollowing(username)
+                followers.postValue(result)
+            }
         }
         return following
     }
-
-    fun getLoading(): LiveData<Boolean> = loading
 
     fun getUserIsFavorite(name: String): LiveData<Boolean> {
         val result = repository.checkUserFavorite(name)
@@ -67,12 +58,16 @@ class DetailViewModel(private val repository: GithubUserRepository) : ViewModel(
     }
 
     fun addUserToFavorite(user: User) {
-        repository.addFavoriteUser(user)
-        getUserIsFavorite(user.username)
+        viewModelScope.launch {
+            repository.addFavoriteUser(user)
+            getUserIsFavorite(user.username)
+        }
     }
 
     fun removeUserFromFavorite(user: User) {
-        repository.deleteFavoriteUser(user)
-        getUserIsFavorite(user.username)
+        viewModelScope.launch {
+            repository.deleteFavoriteUser(user)
+            getUserIsFavorite(user.username)
+        }
     }
 }
