@@ -12,7 +12,6 @@ import com.zairussalamdev.gitbox.data.entities.User
 import com.zairussalamdev.gitbox.database.GitBoxDatabase
 import com.zairussalamdev.gitbox.database.UserDao
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 internal class StackWidgetFactory(private val context: Context) :
@@ -63,11 +62,9 @@ internal class StackWidgetFactory(private val context: Context) :
     override fun hasStableIds(): Boolean = false
 
     private fun fetchUserData() {
-        runBlocking {
-            launch(Dispatchers.IO) {
-                val users = userDao.getAllAsList()
-                userItems = users
-            }
+        runBlocking(Dispatchers.IO) {
+            val users = userDao.getAllAsList()
+            userItems = users
         }
     }
 }
